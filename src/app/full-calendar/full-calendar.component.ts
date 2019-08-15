@@ -54,6 +54,8 @@ export class FullCalendarComponent implements OnInit {
       editable: true,
       eventLimit: true,
       locale: fr,
+      minTime: '07:00:00',
+      maxTime: '21:00:00',
       // businessHours: true,
       businessHours: [ // specify an array instead
         {
@@ -114,6 +116,27 @@ export class FullCalendarComponent implements OnInit {
       //
       // ]
       events: this.eventData,
+      selectConstraint: 'businessHours',
+      select: (start, end, jsEvent, view) => {
+        if (start.isAfter(moment())) {
+
+          const eventTitle = prompt('Provide Event Title');
+          if (eventTitle) {
+            $('#calendar').fullCalendar('renderEvent', {
+              title: eventTitle,
+              start: start,
+              end: end,
+              stick: true
+            });
+            alert('Appointment booked at: ' + start.format('h(:mm)a'));
+          }
+        } else {
+          alert('Cannot book an appointment in the past');
+        }
+      },
+      eventClick: function(calEvent, jsEvent, view) {
+        alert('Event: ' + calEvent.title);
+      },
       dayClick: (date, jsEvent, activeView) => {
         this.dayClick(date, jsEvent, activeView);
       },
