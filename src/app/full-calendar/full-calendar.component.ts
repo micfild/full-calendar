@@ -134,7 +134,7 @@ export class FullCalendarComponent implements OnInit {
           alert('Cannot book an appointment in the past');
         }
       },
-      eventClick: function(calEvent, jsEvent, view) {
+      eventClick: (calEvent, jsEvent, view) => {
         alert('Event: ' + calEvent.title);
       },
       dayClick: (date, jsEvent, activeView) => {
