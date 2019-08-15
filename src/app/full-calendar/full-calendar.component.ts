@@ -124,8 +124,8 @@ export class FullCalendarComponent implements OnInit {
           if (eventTitle) {
             $('#calendar').fullCalendar('renderEvent', {
               title: eventTitle,
-              start: start,
-              end: end,
+              start,
+              end,
               stick: true
             });
             alert('Appointment booked at: ' + start.format('h(:mm)a'));
